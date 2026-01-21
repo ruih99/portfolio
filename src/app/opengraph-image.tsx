@@ -94,7 +94,7 @@ export default async function Image() {
               textShadow: "0 0 40px rgba(0, 255, 0, 0.3)",
             }}
           >
-            Rui Honda
+            ruih99
           </h1>
 
           {/* 肩書き */}
@@ -108,7 +108,7 @@ export default async function Image() {
               textTransform: "uppercase",
             }}
           >
-            Software Engineer
+            Software Developer
           </p>
 
           {/* 区切り線 */}
