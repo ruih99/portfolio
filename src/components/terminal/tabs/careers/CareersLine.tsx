@@ -61,9 +61,6 @@ export function CompletedCareersLine({
 
     const company = localizedCareer.company;
     const position = localizedCareer.position;
-    const description = localizedCareer.description;
-    const responsibilities = localizedCareer.responsibilities;
-    const achievements = localizedCareer.achievements;
     const technologies = localizedCareer.technologies;
 
     return (
@@ -108,68 +105,33 @@ export function CompletedCareersLine({
               </div>
             </div>
 
-            <div className="text-gray-400 text-xs md:text-sm mt-1 break-words">
-              {description}
-            </div>
           </div>
 
           {isExpanded && (
             <div className="ml-2 md:ml-6 mt-3 md:mt-4 mb-2 border-l-2 border-gray-700 pl-2 md:pl-4 overflow-hidden">
-              <div className="mb-3 md:mb-4 text-xs md:text-sm">
-                <span className="text-gray-400">$ </span>
-                <span className="text-green-400">cat </span>
-                <span className="text-cyan-400 break-all">{line.careerId}/README.md</span>
-              </div>
-
-              {(!responsibilities || responsibilities.length === 0) &&
-               (!achievements || achievements.length === 0) &&
-               (!technologies || technologies.length === 0) ? (
+              {(!technologies || technologies.length === 0) ? (
                 <div className="text-gray-500">
                   {`// ${t.sectionLabels.comingSoon}`}
                 </div>
               ) : (
-                <>
-                  {responsibilities && responsibilities.length > 0 && (
-                    <div className="space-y-1 mb-3 md:mb-4">
-                      <div className="text-gray-500 text-xs md:text-sm">## {t.sectionLabels.responsibilities}</div>
-                      {responsibilities.map((item, idx) => (
-                        <div key={idx} className="text-green-400 text-xs md:text-sm break-words">
-                          <span className="text-gray-500">-</span> {item}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {achievements && achievements.length > 0 && (
-                    <div className="space-y-1 mb-3 md:mb-4">
-                      <div className="text-gray-500 text-xs md:text-sm">## {t.sectionLabels.achievements}</div>
-                      {achievements.map((item, idx) => (
-                        <div key={idx} className="text-green-400 text-xs md:text-sm break-words">
-                          <span className="text-amber-400">+</span> {item}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="mt-3 md:mt-4 bg-black/50 rounded p-2 md:p-4 border border-gray-700">
-                    <div className="mb-2 text-xs md:text-sm break-all">
-                      <span className="text-gray-400">$ </span>
-                      <span className="text-green-400">echo </span>
-                      <span className="text-cyan-400">$TECH_STACK </span>
-                      <span className="text-gray-300">| tr &apos;,&apos; &apos;\n&apos;</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 md:gap-2">
-                      {technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-1.5 md:px-2 py-1 md:py-2 text-xs bg-gray-800/50 text-green-300 rounded border border-gray-700"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                <div className="bg-black/50 rounded p-2 md:p-4 border border-gray-700">
+                  <div className="mb-2 text-xs md:text-sm break-all">
+                    <span className="text-gray-400">$ </span>
+                    <span className="text-green-400">echo </span>
+                    <span className="text-cyan-400">$TECH_STACK </span>
+                    <span className="text-gray-300">| tr &apos;,&apos; &apos;\n&apos;</span>
                   </div>
-                </>
+                  <div className="flex flex-wrap gap-1.5 md:gap-2">
+                    {technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-1.5 md:px-2 py-1 md:py-2 text-xs bg-gray-800/50 text-green-300 rounded border border-gray-700"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           )}
