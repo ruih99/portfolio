@@ -129,7 +129,14 @@
           "name": "PostgreSQL",
           "level": "daily",
           "yearsOfExperience": 1,
-          "isStrength": true
+          "isStrength": true,
+          "children": [
+            {
+              "name": "Supabase",
+              "level": "learning",
+              "yearsOfExperience": 0.5
+            }
+          ]
         },
         {
           "name": "Fauna",
