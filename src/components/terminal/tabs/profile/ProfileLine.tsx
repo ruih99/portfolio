@@ -161,10 +161,10 @@ export function ActiveSocialLine({
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 text-white hover:text-white transition-colors"
+      className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
     >
       <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
-      <span className="hover:underline underline-offset-4">{link.href}</span>
+      <span className="hover:underline underline-offset-4 break-all">{link.href}</span>
     </a>
   );
 }
@@ -182,10 +182,10 @@ export function CompletedSocialLine({ link }: { link: SocialLink }) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 text-white hover:text-white transition-colors"
+      className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
     >
-      <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
-      <span className="hover:underline underline-offset-4">{link.href}</span>
+      <Icon className={`h-4 w-4 mt-0.5 ${link.color}`} strokeWidth={1.5} />
+      <span className="hover:underline underline-offset-4 break-all">{link.href}</span>
     </a>
   );
 }

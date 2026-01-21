@@ -88,7 +88,7 @@ export function ProfileTab({ onTabChange, isActive = false }: ProfileTabProps) {
   if (!isHydrated) return null;
 
   return (
-    <div className="overflow-x-auto scrollbar-hide-x">
+    <div className="overflow-hidden">
       {terminalLines.slice(0, completedLines).map((line, index) => (
         <CompletedLine key={`completed-${index}`} line={line} onTabChange={onTabChange} />
       ))}
@@ -114,7 +114,7 @@ export function ProfileTab({ onTabChange, isActive = false }: ProfileTabProps) {
       )}
 
       {(phase.type === "social" || phase.type === "complete" || completedSocials > 0) && (
-        <div className="space-y-2 mt-2">
+        <div className="space-y-2 mt-2 overflow-hidden max-w-full">
           {socialLinks.slice(0, completedSocials).map((link, index) => (
             <CompletedSocialLine key={`social-completed-${index}`} link={link} />
           ))}
