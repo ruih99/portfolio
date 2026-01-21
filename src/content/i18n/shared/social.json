@@ -1,0 +1,22 @@
+{
+  "links": [
+    {
+      "name": "GitHub",
+      "href": "https://github.com/ruih99",
+      "iconType": "github",
+      "color": "text-white"
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/in/ruih99/",
+      "iconType": "linkedin",
+      "color": "text-[#0A66C2]"
+    },
+    {
+      "name": "X",
+      "href": "https://x.com/ruih99_dev",
+      "iconType": "x",
+      "color": "text-white"
+    }
+  ]
+}
