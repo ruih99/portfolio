@@ -29,11 +29,11 @@ export function getTerminalLines(locale: "ja" | "en"): TerminalLine[] {
   return [
     { type: "command", command: "cat", commandArg: "about-me.txt" },
     { type: "output", content: t.aboutMe },
-    { type: "command", command: "cd .. &&", commandArg: "skills" },
+    { type: "command", command: "cd", commandArg: "../skills" },
     { type: "tab-link", content: t.skills, tabId: "skills" },
-    { type: "command", command: "cd .. &&", commandArg: "careers" },
+    { type: "command", command: "cd", commandArg: "../careers" },
     { type: "tab-link", content: t.career, tabId: "careers" },
-    { type: "command", command: "cd .. &&", commandArg: "projects" },
+    { type: "command", command: "cd", commandArg: "../projects" },
     { type: "tab-link", content: t.projects, tabId: "projects" },
     { type: "command", command: "cat", commandArg: "sns.lnk" },
   ];
@@ -163,8 +163,10 @@ export function ActiveSocialLine({
       rel="noopener noreferrer"
       className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
     >
-      <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
-      <span className="hover:underline underline-offset-4 break-all">{link.href}</span>
+      <span className="h-6 flex items-center">
+        <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
+      </span>
+      <span className="hover:underline underline-offset-4 break-all leading-6">{link.href}</span>
     </a>
   );
 }
@@ -184,8 +186,10 @@ export function CompletedSocialLine({ link }: { link: SocialLink }) {
       rel="noopener noreferrer"
       className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
     >
-      <Icon className={`h-4 w-4 mt-0.5 ${link.color}`} strokeWidth={1.5} />
-      <span className="hover:underline underline-offset-4 break-all">{link.href}</span>
+      <span className="h-6 flex items-center">
+        <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
+      </span>
+      <span className="hover:underline underline-offset-4 break-all leading-6">{link.href}</span>
     </a>
   );
 }
