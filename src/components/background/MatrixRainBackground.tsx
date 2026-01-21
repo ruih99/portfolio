@@ -14,7 +14,13 @@ const TILE_SET = [
 export function MatrixRainBackground() {
   return (
     <div
-      className="fixed inset-0 z-0 opacity-30 pointer-events-none"
+      className="fixed z-0 opacity-30 pointer-events-none"
+      style={{
+        top: "calc(-1 * env(safe-area-inset-top, 0px))",
+        right: "calc(-1 * env(safe-area-inset-right, 0px))",
+        bottom: "calc(-1 * env(safe-area-inset-bottom, 0px))",
+        left: "calc(-1 * env(safe-area-inset-left, 0px))",
+      }}
       aria-hidden="true"
     >
       <ReactMatrixAnimation
