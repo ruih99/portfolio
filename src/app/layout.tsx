@@ -32,6 +32,14 @@ export const metadata: Metadata = {
       "Portfolio site of Rui Honda, a software engineer. Showcasing skills, careers, and projects.",
     siteName: "ruih99.dev",
     locale: "ja_JP",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Rui Honda - Portfolio",
+      },
+    ],
   },
   metadataBase: new URL("https://www.ruih99.dev"),
 };
