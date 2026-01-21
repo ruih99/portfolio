@@ -1,0 +1,88 @@
+{
+  "command": "git log",
+  "present": "現在",
+  "sectionLabels": {
+    "responsibilities": "担当業務",
+    "achievements": "成果・実績",
+    "comingSoon": "準備中"
+  },
+  "items": {
+    "tokuneko": {
+      "company": "トクネコ株式会社",
+      "position": "バックエンドエンジニア（業務委託）",
+      "period": {
+        "start": "2025-07",
+        "end": "present"
+      },
+      "description": "",
+      "responsibilities": [],
+      "achievements": [],
+      "technologies": []
+    },
+    "betterbound": {
+      "company": "株式会社Betterbound",
+      "position": "フルスタックエンジニア（業務委託）",
+      "period": {
+        "start": "2023-08",
+        "end": "present"
+      },
+      "description": "企画系チームの生産性向上SaaSの開発に従事。「チームの見える化」を推進するタスク管理ツールの設計・開発・運用保守を担当。",
+      "responsibilities": [
+        "タスク管理ツールのシステム設計・開発",
+        "成果物登録プラットフォームの構築",
+        "ガントチャート機能の拡張開発",
+        "テスト・運用保守"
+      ],
+      "achievements": [
+        "企画系チームが成果物を登録するためのプラットフォームを作成",
+        "特定ユーザーへの通知を可能にするメンション機能を実装",
+        "React-Ganttライブラリをforkして拡張し、ガントチャート上に表示するデータをカスタマイズ"
+      ],
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "AWS",
+        "Fauna",
+        "PostgreSQL",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    "famitra": {
+      "company": "株式会社ファミトラ",
+      "position": "フルスタックエンジニア",
+      "period": {
+        "start": "2021-10",
+        "end": "2025-06"
+      },
+      "description": "家族信託DXを推進する自社開発企業にて、社内コンサルタント向け管理画面やお客様向けアプリの開発に従事。要件定義からシステム設計、開発、運用保守まで一貫して担当。",
+      "responsibilities": [
+        "社内コンサルタント向け管理画面の開発（家系図・資産情報・提案書出力機能）",
+        "信託契約締結ガイドアプリの設計・開発",
+        "帳簿提出アプリの設計・開発",
+        "ファミトラアプリ（Flutter）の開発",
+        "要件定義・システム設計・テスト・運用保守"
+      ],
+      "achievements": [
+        "GoogleSlidesAPIを用いた提案書自動作成機能を実装",
+        "ソーシャルPLUSのAPIを用いたLINE通知を実装",
+        "顧客とのLINE・Gmailのやり取りを管理画面上で確認できる機能を実装",
+        "AWS S3 × ActiveStorageで証憑画像のプレビュー表示を実装",
+        "Moneytree LINK SDKを使用した口座・取引履歴の表示を実装"
+      ],
+      "technologies": [
+        "Rails",
+        "TypeScript",
+        "Next.js",
+        "Flutter",
+        "Chakra UI",
+        "MySQL",
+        "AWS S3",
+        "HTML(Haml)",
+        "CSS",
+        "JavaScript"
+      ]
+    }
+  }
+}

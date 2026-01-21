@@ -1,0 +1,18 @@
+{
+  "command": "ls -la projects/",
+  "comingSoon": "// もっとプロジェクトを追加予定...",
+  "items": [
+    {
+      "name": "ポートフォリオサイト",
+      "description": "ターミナル風のUIを持つ個人ポートフォリオサイト。Next.js、TypeScript、Tailwind CSSを使用して構築。",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Radix UI"
+      ],
+      "githubUrl": "https://github.com/ruih99/my-portfolio"
+    }
+  ]
+}
