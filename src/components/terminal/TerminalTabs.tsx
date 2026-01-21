@@ -37,7 +37,7 @@ export function TerminalTabs({ activeTab, onTabChange }: TerminalTabsProps) {
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`md:flex-1 px-2 md:px-3 py-1.5 text-sm md:text-base font-mono rounded-none transition-colors whitespace-nowrap min-w-fit ${
+            className={`flex-1 px-2 md:px-3 py-1.5 text-sm md:text-base font-mono rounded-none transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? "text-green-400 border-b-2 border-green-400"
                 : "text-gray-400 hover:text-green-300"
