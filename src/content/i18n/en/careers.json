@@ -1,0 +1,88 @@
+{
+  "command": "git log",
+  "present": "Present",
+  "sectionLabels": {
+    "responsibilities": "Responsibilities",
+    "achievements": "Achievements",
+    "comingSoon": "Coming soon"
+  },
+  "items": {
+    "tokuneko": {
+      "company": "Tokuneko Inc.",
+      "position": "Backend Engineer (Contract)",
+      "period": {
+        "start": "2025-07",
+        "end": "present"
+      },
+      "description": "",
+      "responsibilities": [],
+      "achievements": [],
+      "technologies": []
+    },
+    "betterbound": {
+      "company": "Betterbound Inc.",
+      "position": "Full-Stack Engineer (Contract)",
+      "period": {
+        "start": "2023-08",
+        "end": "present"
+      },
+      "description": "Developing a productivity improvement SaaS for planning teams. Responsible for design, development, and maintenance of a task management tool promoting 'team visualization'.",
+      "responsibilities": [
+        "System design and development of task management tool",
+        "Building deliverable registration platform",
+        "Extended development of Gantt chart functionality",
+        "Testing and maintenance"
+      ],
+      "achievements": [
+        "Created a platform for planning teams to register deliverables",
+        "Implemented mention feature enabling notifications to specific users",
+        "Forked and extended React-Gantt library to customize data displayed on Gantt charts"
+      ],
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "AWS",
+        "Fauna",
+        "PostgreSQL",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    "famitra": {
+      "company": "famitra Inc.",
+      "position": "Full-Stack Engineer",
+      "period": {
+        "start": "2021-10",
+        "end": "2025-06"
+      },
+      "description": "Working at a company promoting Family Trust DX, developing internal consultant management systems and customer-facing applications. Responsible for requirements definition, system design, development, and maintenance.",
+      "responsibilities": [
+        "Development of internal consultant management system (family tree, asset information, proposal output)",
+        "Design and development of trust contract guide app",
+        "Design and development of ledger submission app",
+        "Development of Famitra app (Flutter)",
+        "Requirements definition, system design, testing, and maintenance"
+      ],
+      "achievements": [
+        "Implemented automatic proposal generation using Google Slides API",
+        "Implemented LINE notifications using Social PLUS API",
+        "Implemented feature to view LINE and Gmail communications with customers on the management screen",
+        "Implemented receipt image preview display using AWS S3 × ActiveStorage",
+        "Implemented account and transaction history display using Moneytree LINK SDK"
+      ],
+      "technologies": [
+        "Rails",
+        "TypeScript",
+        "Next.js",
+        "Flutter",
+        "Chakra UI",
+        "MySQL",
+        "AWS S3",
+        "HTML(Haml)",
+        "CSS",
+        "JavaScript"
+      ]
+    }
+  }
+}

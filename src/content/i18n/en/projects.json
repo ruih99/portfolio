@@ -1,0 +1,18 @@
+{
+  "command": "ls -la projects/",
+  "comingSoon": "// More projects coming soon...",
+  "items": [
+    {
+      "name": "Portfolio Website",
+      "description": "Personal portfolio website with a terminal-style UI. Built with Next.js, TypeScript, and Tailwind CSS.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Radix UI"
+      ],
+      "githubUrl": "https://github.com/ruih99/my-portfolio"
+    }
+  ]
+}
