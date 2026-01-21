@@ -64,13 +64,19 @@ export function SkillsTab({ isActive = false }: SkillsTabProps) {
     [skillsLines, skillsDelayMap]
   );
 
+  // 完了済み行のリストをキャッシュ（新しい行が追加されるまで再計算しない）
+  const completedSkillsElements = useMemo(() =>
+    skillsLines.slice(0, skillsCompletedLines).map((line, index) => (
+      <CompletedSkillsLine key={`skill-${line.type}-${index}`} line={line} />
+    )),
+    [skillsLines, skillsCompletedLines]
+  );
+
   if (!isHydrated) return null;
 
   return (
     <div className="overflow-x-auto scrollbar-hide-x">
-      {skillsLines.slice(0, skillsCompletedLines).map((line, index) => (
-        <CompletedSkillsLine key={index} line={line} />
-      ))}
+      {completedSkillsElements}
 
       {skillsPhase.type === "line" && (
         <ActiveSkillsLine
