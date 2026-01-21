@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Rui Honda",
   description:
-    "Portfolio site of ruih99, a software engineer. Showcasing skills, careers, and projects.",
+    "Portfolio site of Rui Honda, a software engineer. Showcasing skills, careers, and projects.",
   keywords: ["ruih99", "portfolio", "software engineer", "web development"],
   authors: [{ name: "ruih99", url: "https://ruih99.dev" }],
   creator: "ruih99",
