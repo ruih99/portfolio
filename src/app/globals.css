@@ -112,3 +112,11 @@ body::-webkit-scrollbar {
     padding-left: env(safe-area-inset-left);
   }
 }
+
+/* Reduced motion support for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  .animate-blink,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
