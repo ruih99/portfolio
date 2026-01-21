@@ -46,12 +46,6 @@ export interface LocalizedCareer {
     start: string;
     end: string;
   };
-  /** 説明 */
-  description: string;
-  /** 職務内容 */
-  responsibilities: string[];
-  /** 実績 */
-  achievements: string[];
   /** 使用技術 */
   technologies: string[];
 }
