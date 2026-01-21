@@ -78,7 +78,7 @@ export function CompletedSkillsLine({ line }: { line: SkillsLine }) {
       return <CompletedCommandLine command="tree" />;
     case "category":
       return (
-        <div className="whitespace-pre font-mono">
+        <div className="whitespace-pre font-mono text-sm md:text-base">
           {line.isLastCategory ? <TreeLast /> : <TreeBranch />}
           <span className="text-cyan-400">{line.categoryName}/</span>
         </div>
