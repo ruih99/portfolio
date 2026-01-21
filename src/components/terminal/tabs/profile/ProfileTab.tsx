@@ -85,13 +85,27 @@ export function ProfileTab({ onTabChange, isActive = false }: ProfileTabProps) {
     }
   }, [socialLinks.length]);
 
+  // 完了済み行のリストをキャッシュ（新しい行が追加されるまで再計算しない）
+  const completedLinesElements = useMemo(() =>
+    terminalLines.slice(0, completedLines).map((line, index) => (
+      <CompletedLine key={`completed-${line.type}-${index}`} line={line} onTabChange={onTabChange} />
+    )),
+    [terminalLines, completedLines, onTabChange]
+  );
+
+  // 完了済みソーシャルリンクのリストをキャッシュ
+  const completedSocialElements = useMemo(() =>
+    socialLinks.slice(0, completedSocials).map((link) => (
+      <CompletedSocialLine key={`social-${link.iconType}`} link={link} />
+    )),
+    [socialLinks, completedSocials]
+  );
+
   if (!isHydrated) return null;
 
   return (
     <div className="overflow-hidden">
-      {terminalLines.slice(0, completedLines).map((line, index) => (
-        <CompletedLine key={`completed-${index}`} line={line} onTabChange={onTabChange} />
-      ))}
+      {completedLinesElements}
 
       {phase.type === "line" && phase.index < terminalLines.length && (
         terminalLines[phase.index].type === "command" ? (
@@ -115,9 +129,7 @@ export function ProfileTab({ onTabChange, isActive = false }: ProfileTabProps) {
 
       {(phase.type === "social" || phase.type === "complete" || completedSocials > 0) && (
         <div className="space-y-2 mt-2 overflow-hidden max-w-full">
-          {socialLinks.slice(0, completedSocials).map((link, index) => (
-            <CompletedSocialLine key={`social-completed-${index}`} link={link} />
-          ))}
+          {completedSocialElements}
 
           {phase.type === "social" && phase.index < socialLinks.length && (
             <ActiveSocialLine

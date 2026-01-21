@@ -2,6 +2,7 @@
  * スキルタブの行表示コンポーネント
  */
 
+import { memo } from "react";
 import {
   SKILLS_TIMING,
   useInstantComplete,
@@ -71,8 +72,9 @@ export function generateSkillsLines(locale: "ja" | "en"): SkillsLine[] {
 
 /**
  * 完了済みスキル行の表示コンポーネント
+ * memo化により、propsが変更されない限り再レンダリングを防ぐ
  */
-export function CompletedSkillsLine({ line }: { line: SkillsLine }) {
+export const CompletedSkillsLine = memo(function CompletedSkillsLine({ line }: { line: SkillsLine }) {
   switch (line.type) {
     case "command":
       return <CompletedCommandLine command="tree" />;
@@ -103,7 +105,7 @@ export function CompletedSkillsLine({ line }: { line: SkillsLine }) {
     default:
       return null;
   }
-}
+});
 
 /**
  * アクティブな出力アイテム表示コンポーネント

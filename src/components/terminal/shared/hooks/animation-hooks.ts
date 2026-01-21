@@ -2,7 +2,44 @@
  * アニメーション関連のカスタムフックと定数
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+
+/**
+ * prefers-reduced-motion メディアクエリを検出するフック
+ * @returns ユーザーがモーション軽減を希望しているかどうか
+ */
+function usePrefersReducedMotion(): boolean {
+  // 初期値をSSR対応のため、サーバーサイドではfalseとする
+  const getInitialValue = () => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  };
+
+  const [prefersReduced, setPrefersReduced] = useState(getInitialValue);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const handler = (event: MediaQueryListEvent) => {
+      setPrefersReduced(event.matches);
+    };
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  return prefersReduced;
+}
+
+/**
+ * モバイル/タッチデバイスを検出するフック
+ * @returns タッチデバイスかどうか
+ */
+function useIsMobile(): boolean {
+  return useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  }, []);
+}
 
 export const TIMING = {
   COMMAND_CHAR_SPEED: 40,
@@ -61,6 +98,10 @@ export function useAnimationTrigger(
 
 /**
  * タイプライター効果を実現するカスタムフック
+ * - prefers-reduced-motion が有効な場合は即座に全文表示
+ * - モバイルデバイスでは速度を2倍に高速化
+ * - requestAnimationFrame ベースで CPU 負荷を軽減
+ *
  * @param text - 表示するテキスト
  * @param baseSpeed - 基本タイピング速度（ミリ秒/文字）
  * @param jitter - タイピング速度のランダム変動幅（ミリ秒）
@@ -80,39 +121,77 @@ export function useTypewriter(
   const hasCalledComplete = useRef(false);
   const indexRef = useRef(0);
 
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const isMobile = useIsMobile();
+
+  // モバイルでは速度を2倍に（baseSpeed を半分に）
+  const effectiveSpeed = isMobile ? baseSpeed / 2 : baseSpeed;
+  const effectiveJitter = isMobile ? jitter / 2 : jitter;
+
   useEffect(() => {
     hasCalledComplete.current = false;
     indexRef.current = 0;
-    const resetTimeout = setTimeout(() => {
+    // setState を非同期で実行して ESLint ルールに準拠
+    const timeoutId = setTimeout(() => {
       setDisplayedText("");
       setIsComplete(!text);
     }, 0);
-    return () => clearTimeout(resetTimeout);
+    return () => clearTimeout(timeoutId);
   }, [text]);
 
   useEffect(() => {
     if (!text) return;
 
-    let cancelled = false;
-
-    const typeNextChar = () => {
-      if (cancelled) return;
-      if (indexRef.current < text.length) {
-        indexRef.current++;
-        setDisplayedText(text.slice(0, indexRef.current));
-        const randomDelay = baseSpeed + (Math.random() * 2 - 1) * jitter;
-        setTimeout(typeNextChar, Math.max(10, randomDelay));
-      } else {
+    // prefers-reduced-motion が有効な場合は即座に全文表示
+    if (prefersReducedMotion) {
+      // setState を非同期で実行して ESLint ルールに準拠
+      const timeoutId = setTimeout(() => {
+        setDisplayedText(text);
         setIsComplete(true);
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    }
+
+    let cancelled = false;
+    let animationFrameId: number;
+    let lastTime = 0;
+    let nextCharDelay = initialDelay > 0 ? initialDelay : effectiveSpeed;
+
+    const animate = (currentTime: number) => {
+      if (cancelled) return;
+
+      if (lastTime === 0) {
+        lastTime = currentTime;
       }
+
+      const elapsed = currentTime - lastTime;
+
+      if (elapsed >= nextCharDelay) {
+        if (indexRef.current < text.length) {
+          indexRef.current++;
+          setDisplayedText(text.slice(0, indexRef.current));
+          lastTime = currentTime;
+          // 次の文字までの遅延をランダムに設定
+          nextCharDelay =
+            effectiveSpeed + (Math.random() * 2 - 1) * effectiveJitter;
+        } else {
+          setIsComplete(true);
+          return;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
     };
 
-    setTimeout(typeNextChar, initialDelay > 0 ? initialDelay : baseSpeed);
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       cancelled = true;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
-  }, [text, baseSpeed, jitter, initialDelay]);
+  }, [text, effectiveSpeed, effectiveJitter, initialDelay, prefersReducedMotion]);
 
   useEffect(() => {
     if (isComplete && !hasCalledComplete.current && onComplete) {

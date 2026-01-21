@@ -2,6 +2,7 @@
  * プロフィールタブの行表示コンポーネント
  */
 
+import { memo } from "react";
 import { TabId } from "@/components/terminal/TerminalTabs";
 import {
   translations,
@@ -50,12 +51,13 @@ export function getSocialLinks(locale: "ja" | "en"): SocialLink[] {
 
 /**
  * 完了済みターミナル行の表示コンポーネント
+ * memo化により、propsが変更されない限り再レンダリングを防ぐ
  * @param props - コンポーネントプロパティ
  * @param props.line - 表示する行データ
  * @param props.onTabChange - タブ変更時のコールバック関数
  * @returns 完了済み行のJSX要素
  */
-export function CompletedLine({ line, onTabChange }: { line: TerminalLine; onTabChange?: (tabId: TabId) => void }) {
+export const CompletedLine = memo(function CompletedLine({ line, onTabChange }: { line: TerminalLine; onTabChange?: (tabId: TabId) => void }) {
   if (line.type === "command" && line.command) {
     return (
       <CompletedCommandLine
@@ -91,7 +93,7 @@ export function CompletedLine({ line, onTabChange }: { line: TerminalLine; onTab
       ))}
     </div>
   );
-}
+});
 
 /**
  * アクティブな出力行の表示コンポーネント
@@ -173,11 +175,12 @@ export function ActiveSocialLine({
 
 /**
  * 完了済みソーシャルリンク行の表示コンポーネント
+ * memo化により、propsが変更されない限り再レンダリングを防ぐ
  * @param props - コンポーネントプロパティ
  * @param props.link - ソーシャルリンクデータ
  * @returns 完了済みソーシャルリンク行のJSX要素
  */
-export function CompletedSocialLine({ link }: { link: SocialLink }) {
+export const CompletedSocialLine = memo(function CompletedSocialLine({ link }: { link: SocialLink }) {
   const Icon = iconMap[link.iconType];
   return (
     <a
@@ -192,4 +195,4 @@ export function CompletedSocialLine({ link }: { link: SocialLink }) {
       <span className="hover:underline underline-offset-4 break-all leading-5 md:leading-6">{link.href}</span>
     </a>
   );
-}
+});
