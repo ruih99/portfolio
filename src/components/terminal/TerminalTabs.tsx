@@ -31,13 +31,13 @@ export function TerminalTabs({ activeTab, onTabChange }: TerminalTabsProps) {
   const t = translations[locale];
 
   return (
-    <div className="flex items-center px-2 pb-0 border-t border-gray-700">
-      <div className="flex flex-1 gap-1 min-w-0 overflow-x-auto scrollbar-hide-x">
+    <div className="flex items-center px-1 md:px-2 pb-0 border-t border-gray-700">
+      <div className="flex flex-1 gap-0.5 md:gap-1 min-w-0 overflow-x-auto scrollbar-hide-x">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex-1 px-3 py-1.5 text-base font-mono rounded-none transition-colors whitespace-nowrap min-w-fit ${
+            className={`md:flex-1 px-2 md:px-3 py-1.5 text-sm md:text-base font-mono rounded-none transition-colors whitespace-nowrap min-w-fit ${
               activeTab === tab.id
                 ? "text-green-400 border-b-2 border-green-400"
                 : "text-gray-400 hover:text-green-300"
