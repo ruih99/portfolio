@@ -36,7 +36,7 @@ function formatExperience(years: number): string {
  * ツリー表示用の文字コンポーネント
  */
 function TreeChar({ char }: { char: string }) {
-  return <span className="inline-block w-4 text-center">{char}</span>;
+  return <span className="inline-block w-3 md:w-4 text-center">{char}</span>;
 }
 
 /**
@@ -123,19 +123,19 @@ export function TreeSkillItem({
   const { label, style } = getTagStyle(skill.level);
 
   return (
-    <div className="whitespace-pre font-mono flex items-center">
+    <div className="whitespace-pre font-mono flex items-center text-sm md:text-base">
       {parentIsLast ? <TreeSpace /> : <TreeVertical />}
       {isLastInCategory ? <TreeLast /> : <TreeBranch />}
       <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
         {skill.name}
       </span>
-      <span className="text-gray-500 ml-2">({formatExperience(skill.yearsOfExperience)})</span>
+      <span className="text-gray-500 ml-1.5 md:ml-2">({formatExperience(skill.yearsOfExperience)})</span>
       {label && (
-        <span className={`ml-2 px-1.5 py-0 text-[10px] rounded border ${style}`}>
+        <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
           {label}
         </span>
       )}
-      {skill.isStrength && <span className="text-amber-400 ml-2">★</span>}
+      {skill.isStrength && <span className="text-amber-400 ml-1.5 md:ml-2">★</span>}
     </div>
   );
 }
@@ -157,20 +157,20 @@ export function TreeChildSkillItem({
   const { label, style } = getTagStyle(skill.level);
 
   return (
-    <div className="whitespace-pre font-mono flex items-center">
+    <div className="whitespace-pre font-mono flex items-center text-sm md:text-base">
       {parentIsLast ? <TreeSpace /> : <TreeVertical />}
       {parentSkillIsLast ? <TreeSpace /> : <TreeVertical />}
       {isLastChild ? <TreeLast /> : <TreeBranch />}
       <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
         {skill.name}
       </span>
-      <span className="text-gray-500 ml-2">({formatExperience(skill.yearsOfExperience)})</span>
+      <span className="text-gray-500 ml-1.5 md:ml-2">({formatExperience(skill.yearsOfExperience)})</span>
       {label && (
-        <span className={`ml-2 px-1.5 py-0 text-[10px] rounded border ${style}`}>
+        <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
           {label}
         </span>
       )}
-      {skill.isStrength && <span className="text-amber-400 ml-2">★</span>}
+      {skill.isStrength && <span className="text-amber-400 ml-1.5 md:ml-2">★</span>}
     </div>
   );
 }

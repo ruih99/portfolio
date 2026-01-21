@@ -77,7 +77,7 @@ export function CompletedLine({ line, onTabChange }: { line: TerminalLine; onTab
     return (
       <button
         onClick={handleTabChange}
-        className="block text-gray-300 hover:text-white hover:underline underline-offset-4 transition-colors mt-1 text-left"
+        className="block text-gray-300 hover:text-white hover:underline underline-offset-4 transition-colors mt-1 text-left text-sm md:text-base"
       >
         {line.content}
       </button>
@@ -85,7 +85,7 @@ export function CompletedLine({ line, onTabChange }: { line: TerminalLine; onTab
   }
 
   return (
-    <div className="text-gray-300 mt-1">
+    <div className="text-gray-300 mt-1 text-sm md:text-base break-words">
       {line.content?.split('\n').map((text, i) => (
         <div key={i}>{text}</div>
       ))}
@@ -123,7 +123,7 @@ export function ActiveOutputLine({
     return (
       <button
         onClick={handleTabChange}
-        className="block text-gray-300 hover:text-white hover:underline underline-offset-4 transition-colors mt-1 text-left"
+        className="block text-gray-300 hover:text-white hover:underline underline-offset-4 transition-colors mt-1 text-left text-sm md:text-base"
       >
         {line.content}
       </button>
@@ -131,7 +131,7 @@ export function ActiveOutputLine({
   }
 
   return (
-    <div className="text-gray-300 mt-1">
+    <div className="text-gray-300 mt-1 text-sm md:text-base break-words">
       {line.content?.split('\n').map((text, i) => (
         <div key={i}>{text}</div>
       ))}
@@ -161,12 +161,12 @@ export function ActiveSocialLine({
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
+      className="grid grid-cols-[auto_1fr] gap-1.5 md:gap-2 items-start text-white hover:text-white transition-colors text-sm md:text-base"
     >
-      <span className="h-6 flex items-center">
-        <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
+      <span className="h-5 md:h-6 flex items-center">
+        <Icon className={`h-3.5 w-3.5 md:h-4 md:w-4 ${link.color}`} strokeWidth={1.5} />
       </span>
-      <span className="hover:underline underline-offset-4 break-all leading-6">{link.href}</span>
+      <span className="hover:underline underline-offset-4 break-all leading-5 md:leading-6">{link.href}</span>
     </a>
   );
 }
@@ -184,12 +184,12 @@ export function CompletedSocialLine({ link }: { link: SocialLink }) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="grid grid-cols-[auto_1fr] gap-2 items-start text-white hover:text-white transition-colors"
+      className="grid grid-cols-[auto_1fr] gap-1.5 md:gap-2 items-start text-white hover:text-white transition-colors text-sm md:text-base"
     >
-      <span className="h-6 flex items-center">
-        <Icon className={`h-4 w-4 ${link.color}`} strokeWidth={1.5} />
+      <span className="h-5 md:h-6 flex items-center">
+        <Icon className={`h-3.5 w-3.5 md:h-4 md:w-4 ${link.color}`} strokeWidth={1.5} />
       </span>
-      <span className="hover:underline underline-offset-4 break-all leading-6">{link.href}</span>
+      <span className="hover:underline underline-offset-4 break-all leading-5 md:leading-6">{link.href}</span>
     </a>
   );
 }
