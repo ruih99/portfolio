@@ -8,7 +8,6 @@
 interface Skill {
   name: string;
   level: string;
-  yearsOfExperience: number;
   isStrength?: boolean;
   children?: Skill[];
 }
@@ -69,7 +68,7 @@ function TreeSpace() {
  */
 function getTagStyle(level: string): { label: string; style: string } {
   const styles: Record<string, { label: string; style: string }> = {
-    daily: { label: "Daily", style: "bg-green-500/20 text-green-400 border-green-500/50" },
+    daily: { label: "Daily", style: "bg-red-500/20 text-red-400 border-red-500/50" },
     regular: { label: "Regular", style: "bg-blue-500/20 text-blue-400 border-blue-500/50" },
     learning: { label: "Learning", style: "bg-yellow-500/20 text-yellow-400 border-yellow-500/50" },
     unused: { label: "", style: "text-gray-500" },
@@ -95,15 +94,19 @@ export function TreeSkillItem({
     <div className="whitespace-pre font-mono flex items-center text-sm md:text-base">
       {parentIsLast ? <TreeSpace /> : <TreeVertical />}
       {isLastInCategory ? <TreeLast /> : <TreeBranch />}
-      <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
+      <span className={!label ? "text-gray-500" : "text-green-400"}>
         {skill.name}
       </span>
       {label && (
-        <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
+        <span
+          className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}
+        >
           {label}
         </span>
       )}
-      {skill.isStrength && <span className="text-amber-400 ml-1.5 md:ml-2">★</span>}
+      {skill.isStrength && (
+        <span className="text-amber-400 ml-1.5 md:ml-2">★</span>
+      )}
     </div>
   );
 }
@@ -129,15 +132,60 @@ export function TreeChildSkillItem({
       {parentIsLast ? <TreeSpace /> : <TreeVertical />}
       {parentSkillIsLast ? <TreeSpace /> : <TreeVertical />}
       {isLastChild ? <TreeLast /> : <TreeBranch />}
-      <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
+      <span className={!label ? "text-gray-500" : "text-green-400"}>
         {skill.name}
       </span>
       {label && (
-        <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
+        <span
+          className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}
+        >
           {label}
         </span>
       )}
-      {skill.isStrength && <span className="text-amber-400 ml-1.5 md:ml-2">★</span>}
+      {skill.isStrength && (
+        <span className="text-amber-400 ml-1.5 md:ml-2">★</span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * 孫スキルアイテム表示コンポーネント
+ */
+export function TreeGrandchildSkillItem({
+  skill,
+  isLastGrandchild,
+  grandparentIsLast,
+  parentSkillIsLast,
+  parentChildIsLast,
+}: {
+  skill: Skill;
+  isLastGrandchild: boolean;
+  grandparentIsLast: boolean;
+  parentSkillIsLast: boolean;
+  parentChildIsLast: boolean;
+}) {
+  const { label, style } = getTagStyle(skill.level);
+
+  return (
+    <div className="whitespace-pre font-mono flex items-center text-sm md:text-base">
+      {grandparentIsLast ? <TreeSpace /> : <TreeVertical />}
+      {parentSkillIsLast ? <TreeSpace /> : <TreeVertical />}
+      {parentChildIsLast ? <TreeSpace /> : <TreeVertical />}
+      {isLastGrandchild ? <TreeLast /> : <TreeBranch />}
+      <span className={!label ? "text-gray-500" : "text-green-400"}>
+        {skill.name}
+      </span>
+      {label && (
+        <span
+          className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}
+        >
+          {label}
+        </span>
+      )}
+      {skill.isStrength && (
+        <span className="text-amber-400 ml-1.5 md:ml-2">★</span>
+      )}
     </div>
   );
 }

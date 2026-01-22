@@ -10,8 +10,6 @@ export interface Skill {
   name: string;
   /** スキルレベル */
   level: string;
-  /** 経験年数 */
-  yearsOfExperience: number;
   /** 強みかどうか */
   isStrength?: boolean;
   /** 子スキル */
@@ -24,8 +22,9 @@ export interface Skill {
  * - category: カテゴリヘッダー行
  * - skill-item: スキルアイテム行
  * - child-skill-item: 子スキルアイテム行
+ * - grandchild-skill-item: 孫スキルアイテム行
  */
-export type SkillsLineType = "command" | "category" | "skill-item" | "child-skill-item";
+export type SkillsLineType = "command" | "category" | "skill-item" | "child-skill-item" | "grandchild-skill-item";
 
 /**
  * スキル行データの構造
@@ -39,4 +38,10 @@ export interface SkillsLine {
   parentIsLast?: boolean;
   parentSkillIsLast?: boolean;
   isLastChild?: boolean;
+  /** 祖親（カテゴリ）が最後かどうか（孫スキル用） */
+  grandparentIsLast?: boolean;
+  /** 親スキルが最後かどうか（孫スキル用） */
+  parentChildIsLast?: boolean;
+  /** 孫スキルが最後かどうか */
+  isLastGrandchild?: boolean;
 }

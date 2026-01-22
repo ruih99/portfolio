@@ -1,6 +1,5 @@
 {
   "command": "tree",
-  "yearsUnit": "y",
   "categories": [
     {
       "id": "backend",
@@ -9,26 +8,22 @@
         {
           "name": "Ruby",
           "level": "daily",
-          "yearsOfExperience": 4,
           "isStrength": true,
           "children": [
             {
               "name": "Ruby on Rails",
               "level": "daily",
-              "yearsOfExperience": 4,
               "isStrength": true
             }
           ]
         },
         {
           "name": "Python",
-          "level": "learning",
-          "yearsOfExperience": 1
+          "level": "learning"
         },
         {
           "name": "Go",
-          "level": "learning",
-          "yearsOfExperience": 0.5
+          "level": "learning"
         }
       ]
     },
@@ -39,66 +34,53 @@
         {
           "name": "TypeScript",
           "level": "daily",
-          "yearsOfExperience": 3,
-          "isStrength": true,
+          "isStrength": true
+        },
+        {
+          "name": "JavaScript",
+          "level": "regular",
           "children": [
             {
               "name": "React.js",
               "level": "daily",
-              "yearsOfExperience": 3,
               "isStrength": true,
               "children": [
                 {
                   "name": "Next.js",
                   "level": "daily",
-                  "yearsOfExperience": 3,
                   "isStrength": true
                 },
                 {
                   "name": "Radix UI",
-                  "level": "regular",
-                  "yearsOfExperience": 1
+                  "level": "regular"
+                },
+                {
+                  "name": "Chakra UI",
+                  "level": "unused"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "name": "JavaScript",
-          "level": "regular",
-          "yearsOfExperience": 4,
-          "children": [
-            {
-              "name": "jQuery",
-              "level": "unused",
-              "yearsOfExperience": 2
             },
             {
               "name": "Vue.js",
-              "level": "unused",
-              "yearsOfExperience": 0.5
+              "level": "unused"
+            },
+            {
+              "name": "jQuery",
+              "level": "unused"
             }
           ]
         },
         {
           "name": "HTML",
-          "level": "learning",
-          "yearsOfExperience": 4
+          "level": "regular"
         },
         {
           "name": "CSS",
-          "level": "learning",
-          "yearsOfExperience": 4,
+          "level": "regular",
           "children": [
             {
               "name": "Tailwind CSS",
-              "level": "learning",
-              "yearsOfExperience": 2
-            },
-            {
-              "name": "Chakra UI",
-              "level": "unused",
-              "yearsOfExperience": 1
+              "level": "regular"
             }
           ]
         }
@@ -110,8 +92,7 @@
       "skills": [
         {
           "name": "Flutter",
-          "level": "learning",
-          "yearsOfExperience": 0.5
+          "level": "learning"
         }
       ]
     },
@@ -122,26 +103,22 @@
         {
           "name": "MySQL",
           "level": "regular",
-          "yearsOfExperience": 3.5,
           "isStrength": true
         },
         {
           "name": "PostgreSQL",
           "level": "daily",
-          "yearsOfExperience": 1,
           "isStrength": true,
           "children": [
             {
               "name": "Supabase",
-              "level": "learning",
-              "yearsOfExperience": 0.5
+              "level": "learning"
             }
           ]
         },
         {
           "name": "Fauna",
-          "level": "unused",
-          "yearsOfExperience": 0.5
+          "level": "unused"
         }
       ]
     },
@@ -152,34 +129,28 @@
         {
           "name": "Cloud",
           "level": "regular",
-          "yearsOfExperience": 3,
           "children": [
             {
               "name": "AWS",
-              "level": "regular",
-              "yearsOfExperience": 3
+              "level": "regular"
             },
             {
               "name": "GCP",
-              "level": "learning",
-              "yearsOfExperience": 0.5
+              "level": "learning"
             }
           ]
         },
         {
           "name": "OS",
           "level": "regular",
-          "yearsOfExperience": 3,
           "children": [
             {
               "name": "macOS",
-              "level": "regular",
-              "yearsOfExperience": 4
+              "level": "regular"
             },
             {
               "name": "Linux",
-              "level": "learning",
-              "yearsOfExperience": 1
+              "level": "learning"
             }
           ]
         }
