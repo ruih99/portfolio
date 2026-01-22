@@ -14,85 +14,54 @@ interface Skill {
 }
 
 /**
- * 経験年数を年月形式でフォーマット
- * @param years - 小数の年数 (例: 3.5, 0.5, 2.25)
- * @returns 年月形式の文字列 (例: "3y6m", "6m", "2y3m")
- */
-function formatExperience(years: number): string {
-  const totalMonths = Math.round(years * 12);
-  const y = Math.floor(totalMonths / 12);
-  const m = totalMonths % 12;
-
-  if (y === 0) {
-    return `${m}m`;
-  }
-  if (m === 0) {
-    return `${y}y`;
-  }
-  return `${y}y${m}m`;
-}
-
-/**
- * ツリー表示用の文字コンポーネント
- */
-function TreeChar({ char }: { char: string }) {
-  return <span className="inline-block w-3 md:w-4 text-center">{char}</span>;
-}
-
-/**
  * ツリーの分岐（├──）を表示するコンポーネント
+ * CSS borderでL字+横線を描画
  */
 export function TreeBranch() {
   return (
-    <span className="text-gray-600">
-      <TreeChar char="├" />
-      <TreeChar char="─" />
-      <TreeChar char="─" />
-      <TreeChar char=" " />
+    <span className="relative inline-flex w-12 md:w-16 h-6 shrink-0">
+      {/* 縦線（上から中央まで） */}
+      <span className="absolute left-0 top-0 h-full border-l border-gray-600" />
+      {/* 横線（左から右へ） */}
+      <span className="absolute left-0 top-1/2 w-full border-t border-gray-600" />
     </span>
   );
 }
 
 /**
  * ツリーの最終分岐（└──）を表示するコンポーネント
+ * CSS borderでL字（角丸）+横線を描画
  */
 export function TreeLast() {
   return (
-    <span className="text-gray-600">
-      <TreeChar char="└" />
-      <TreeChar char="─" />
-      <TreeChar char="─" />
-      <TreeChar char=" " />
+    <span className="relative inline-flex w-12 md:w-16 h-6 shrink-0">
+      {/* 縦線（上から中央まで） */}
+      <span className="absolute left-0 top-0 h-1/2 border-l border-gray-600" />
+      {/* 横線（左から右へ） */}
+      <span className="absolute left-0 top-1/2 w-full border-t border-gray-600" />
     </span>
   );
 }
 
 /**
  * ツリーの縦線（│）を表示するコンポーネント
+ * CSS borderで縦線を描画
  */
 function TreeVertical() {
   return (
-    <span className="text-gray-600">
-      <TreeChar char="│" />
-      <TreeChar char=" " />
-      <TreeChar char=" " />
-      <TreeChar char=" " />
+    <span className="relative inline-flex w-12 md:w-16 h-6 shrink-0">
+      {/* 縦線（上から下まで） */}
+      <span className="absolute left-0 top-0 h-full border-l border-gray-600" />
     </span>
   );
 }
 
 /**
  * ツリーのスペースを表示するコンポーネント
+ * 同じ幅のスペースを維持
  */
 function TreeSpace() {
-  return (
-    <span className="text-gray-600">
-      <TreeChar char=" " />
-      <TreeChar char=" " />
-      <TreeChar char=" " />
-      <TreeChar char=" " />
-    </span>
-  );
+  return <span className="inline-flex w-12 md:w-16 h-6 shrink-0" />;
 }
 
 /**
@@ -129,7 +98,6 @@ export function TreeSkillItem({
       <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
         {skill.name}
       </span>
-      <span className="text-gray-500 ml-1.5 md:ml-2">({formatExperience(skill.yearsOfExperience)})</span>
       {label && (
         <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
           {label}
@@ -164,7 +132,6 @@ export function TreeChildSkillItem({
       <span className={skill.isStrength ? "text-amber-400" : "text-green-400"}>
         {skill.name}
       </span>
-      <span className="text-gray-500 ml-1.5 md:ml-2">({formatExperience(skill.yearsOfExperience)})</span>
       {label && (
         <span className={`ml-1.5 md:ml-2 px-1 md:px-1.5 py-0 text-[9px] md:text-[10px] rounded border ${style}`}>
           {label}
