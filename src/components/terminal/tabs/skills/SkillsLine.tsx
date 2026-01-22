@@ -80,7 +80,7 @@ export const CompletedSkillsLine = memo(function CompletedSkillsLine({ line }: {
       return <CompletedCommandLine command="tree" />;
     case "category":
       return (
-        <div className="whitespace-pre font-mono text-sm md:text-base">
+        <div className="whitespace-pre font-mono flex items-center text-sm md:text-base">
           {line.isLastCategory ? <TreeLast /> : <TreeBranch />}
           <span className="text-cyan-400">{line.categoryName}/</span>
         </div>

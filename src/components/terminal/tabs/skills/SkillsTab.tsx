@@ -4,12 +4,12 @@ import { useState, useMemo } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import {
   SKILLS_TIMING,
-  StandardPhase,
   useAnimationTrigger,
   TerminalPrompt,
   createLineCompletionHandler,
   getLineDelay,
   DelayMap,
+  StandardPhase,
 } from "../../shared";
 import {
   generateSkillsLines,
@@ -30,63 +30,67 @@ interface SkillsTabProps {
  */
 export function SkillsTab({ isActive = false }: SkillsTabProps) {
   const { locale, isHydrated } = useLanguage();
-  const [skillsPhase, setSkillsPhase] = useState<StandardPhase>({ type: "idle" });
-  const [skillsCompletedLines, setSkillsCompletedLines] = useState<number>(0);
+  const [phase, setPhase] = useState<StandardPhase>({ type: "idle" });
+  const [completedLines, setCompletedLines] = useState<number>(0);
 
-  const skillsLines = useMemo(() => generateSkillsLines(locale), [locale]);
+  const lines = useMemo(() => generateSkillsLines(locale), [locale]);
+
+  // 行タイプごとの遅延マップ
+  const lineDelayMap: DelayMap = useMemo(
+    () => ({
+      command: SKILLS_TIMING.POST_COMMAND_DELAY,
+      category: SKILLS_TIMING.CATEGORY_HEADER_DELAY,
+      "skill-item": SKILLS_TIMING.SKILL_ITEM_DELAY,
+      "child-skill-item": SKILLS_TIMING.SKILL_ITEM_DELAY,
+    }),
+    []
+  );
 
   useAnimationTrigger(
-    (isActive ?? false) && isHydrated,
-    () => setSkillsPhase({ type: "line", index: 0 }),
+    isActive && isHydrated,
+    () => setPhase({ type: "line", index: 0 }),
     300
   );
 
-  const skillsDelayMap: DelayMap = useMemo(() => ({
-    command: SKILLS_TIMING.POST_COMMAND_DELAY,
-    category: SKILLS_TIMING.CATEGORY_HEADER_DELAY,
-    "skill-item": SKILLS_TIMING.SKILL_ITEM_DELAY,
-  }), []);
-
-  const handleSkillsLineComplete = useMemo(
+  const handleLineComplete = useMemo(
     () =>
       createLineCompletionHandler<StandardPhase>(
-        skillsLines.length,
-        (index) =>
-          getLineDelay(
-            skillsLines[index].type,
-            skillsDelayMap,
-            SKILLS_TIMING.SKILL_ITEM_DELAY
-          ),
-        setSkillsCompletedLines,
-        setSkillsPhase,
+        lines.length,
+        (index) => getLineDelay(lines[index].type, lineDelayMap),
+        setCompletedLines,
+        setPhase,
         { type: "complete" }
       ),
-    [skillsLines, skillsDelayMap]
+    [lines, lineDelayMap]
   );
 
-  // 完了済み行のリストをキャッシュ（新しい行が追加されるまで再計算しない）
-  const completedSkillsElements = useMemo(() =>
-    skillsLines.slice(0, skillsCompletedLines).map((line, index) => (
-      <CompletedSkillsLine key={`skill-${line.type}-${index}`} line={line} />
-    )),
-    [skillsLines, skillsCompletedLines]
+  // 完了済み行のリストをキャッシュ
+  const completedLinesElements = useMemo(
+    () =>
+      lines.slice(0, completedLines).map((line, index) => (
+        <CompletedSkillsLine key={`completed-${line.type}-${index}`} line={line} />
+      )),
+    [lines, completedLines]
   );
 
   if (!isHydrated) return null;
 
   return (
     <div className="overflow-x-auto scrollbar-hide-x">
-      {completedSkillsElements}
+      {/* 完了済み行 */}
+      {completedLinesElements}
 
-      {skillsPhase.type === "line" && (
+      {/* アクティブな行 */}
+      {phase.type === "line" && phase.index < lines.length && (
         <ActiveSkillsLine
-          key={`skills-active-${skillsPhase.index}`}
-          line={skillsLines[skillsPhase.index]}
-          onComplete={() => handleSkillsLineComplete(skillsPhase.index)}
+          key={`active-${phase.index}`}
+          line={lines[phase.index]}
+          onComplete={() => handleLineComplete(phase.index)}
         />
       )}
 
-      {skillsPhase.type === "complete" && <TerminalPrompt />}
+      {/* 完了後のプロンプト */}
+      {phase.type === "complete" && <TerminalPrompt />}
     </div>
   );
 }
