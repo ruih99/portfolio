@@ -15,6 +15,7 @@ import {
   TreeLast,
   TreeSkillItem,
   TreeChildSkillItem,
+  TreeGrandchildSkillItem,
 } from "./SkillsTree";
 import { SkillsLine, Skill } from "./types";
 
@@ -55,13 +56,30 @@ export function generateSkillsLines(locale: "ja" | "en"): SkillsLine[] {
       if (hasChildren) {
         children.forEach((childSkill: Skill, childIndex: number) => {
           const isLastChild = childIndex === children.length - 1;
+          const grandchildren = childSkill.children;
+          const hasGrandchildren = grandchildren && grandchildren.length > 0;
+
           lines.push({
             type: "child-skill-item",
             skill: childSkill,
             parentIsLast: isLastCategory,
             parentSkillIsLast: isLastInCategory,
-            isLastChild,
+            isLastChild: hasGrandchildren ? false : isLastChild,
           });
+
+          if (hasGrandchildren) {
+            grandchildren.forEach((grandchildSkill: Skill, grandchildIndex: number) => {
+              const isLastGrandchild = grandchildIndex === grandchildren.length - 1;
+              lines.push({
+                type: "grandchild-skill-item",
+                skill: grandchildSkill,
+                grandparentIsLast: isLastCategory,
+                parentSkillIsLast: isLastInCategory,
+                parentChildIsLast: isLastChild,
+                isLastGrandchild,
+              });
+            });
+          }
         });
       }
     });
@@ -102,6 +120,16 @@ export const CompletedSkillsLine = memo(function CompletedSkillsLine({ line }: {
           parentSkillIsLast={line.parentSkillIsLast!}
         />
       );
+    case "grandchild-skill-item":
+      return (
+        <TreeGrandchildSkillItem
+          skill={line.skill!}
+          isLastGrandchild={line.isLastGrandchild!}
+          grandparentIsLast={line.grandparentIsLast!}
+          parentSkillIsLast={line.parentSkillIsLast!}
+          parentChildIsLast={line.parentChildIsLast!}
+        />
+      );
     default:
       return null;
   }
@@ -137,6 +165,7 @@ export function ActiveSkillsLine({
     case "category":
     case "skill-item":
     case "child-skill-item":
+    case "grandchild-skill-item":
       return <ActiveOutputItem line={line} onComplete={onComplete} />;
     default:
       return null;
