@@ -12,7 +12,7 @@
         "start": "2025-07",
         "end": "present"
       },
-      "technologies": []
+      "technologies": ["Rails", "PostgreSQL", "HTML(Haml)", "JavaScript"]
     },
     "betterbound": {
       "company": "Betterbound Inc.",
